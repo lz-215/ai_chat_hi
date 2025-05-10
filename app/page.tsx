@@ -114,6 +114,8 @@ export default function ChatPage() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // Animation is now handled directly by Tailwind classes
+
   // Quick action buttons and models array removed
 
   return (
@@ -123,17 +125,17 @@ export default function ChatPage() {
       {/* Main content area - adjusted padding for re-added slogan */}
       <div className="flex-grow flex flex-col items-center w-full px-4 pt-8 sm:pt-10 pb-4">
 
-        {/* Logo and Slogan */}
-        <div className="flex flex-row items-center mb-6 gap-4">
+        {/* Logo and Slogan with Animations */}
+        <div className="flex flex-row items-center mb-6 gap-4 animate-bounce-in">
           <img
             src="/Qwen-3.png"
             alt="Qwen-3 Logo"
             width={70}
             height={70}
-            className="object-contain"
+            className="object-contain animate-float"
           />
-          <h1 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
-            One-Stop Access to Qwen-3 AI Models
+          <h1 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 animate-shimmer bg-[length:200%_100%]">
+            Единый доступ к моделям Qwen-3 AI
           </h1>
         </div>
 
@@ -148,8 +150,8 @@ export default function ChatPage() {
             <div ref={messagesEndRef} />
           </main>
 
-          {/* Chat Input Area */}
-          <div className="bg-slate-800 bg-opacity-50 p-3 sm:p-4 rounded-b-lg shadow-lg">
+          {/* Chat Input Area with Animations */}
+          <div className="bg-slate-800 bg-opacity-50 p-3 sm:p-4 rounded-b-lg shadow-lg animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <div className="relative flex items-center">
               <textarea
                 value={inputValue}
@@ -160,18 +162,18 @@ export default function ChatPage() {
                     handleSendMessage();
                   }
                 }}
-                placeholder="Type your message... (Shift+Enter for newline)"
-                className="flex-grow w-full p-3 pr-20 bg-slate-700 text-white border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-400 resize-none min-h-[60px] max-h-[150px] text-sm sm:text-base"
+                placeholder="Введите ваше сообщение... (Shift+Enter для новой строки)"
+                className="flex-grow w-full p-3 pr-20 bg-slate-700 text-white border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-400 resize-none min-h-[60px] max-h-[150px] text-sm sm:text-base transition-all duration-300 focus:shadow-[0_0_15px_rgba(168,85,247,0.5)]"
                 rows={2} // Initial rows, can expand
               />
               <div className="absolute right-3 bottom-2.5 flex items-center space-x-2">
-                <button className="p-1.5 text-slate-400 hover:text-purple-400 transition-colors">
+                <button className="p-1.5 text-slate-400 hover:text-purple-400 transition-colors hover:animate-wiggle">
                   <SettingsIcon />
                 </button>
                 {isLoading ? (
                   <button
                     onClick={handleStopGeneration}
-                    className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors shadow-md active:bg-red-700"
+                    className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all shadow-md active:bg-red-700 hover:animate-shake"
                     title="Stop Generation"
                   >
                     <StopIcon />
@@ -179,7 +181,7 @@ export default function ChatPage() {
                 ) : (
                   <button
                     onClick={handleSendMessage}
-                    className="p-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-colors shadow-md active:bg-pink-700 disabled:opacity-50"
+                    className="p-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-all shadow-md active:bg-pink-700 disabled:opacity-50 hover:animate-pulse"
                     disabled={inputValue.trim() === ''}
                   >
                     <SendIcon />
@@ -191,14 +193,133 @@ export default function ChatPage() {
         </div>
       </div>
 
-      {/* Footer Links */}
-      <footer className="py-6 px-4 text-center text-xs text-slate-400 w-full">
-        <Link href="/privacy-policy" className="hover:underline hover:text-purple-400">Privacy Policy</Link>
-        <span className="mx-2">|</span>
-        <a href="#" className="hover:underline hover:text-purple-400">渝ICP备2023003198号-85</a>
-        <span className="mx-2">|</span>
-        <span>© {new Date().getFullYear()} AI Chat. All rights reserved.</span>
-        <p>Contact Us: ytsgabcde17#2925.com, replace # with @ to get the email.</p>
+      {/* Enhanced Footer Section with Rich Animations */}
+      <div className="w-full bg-slate-800 bg-opacity-70 mt-12 py-10">
+        {/* Features Section */}
+        <div className="max-w-6xl mx-auto px-4 mb-12" id="features-section">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 animate-shimmer bg-[length:200%_100%]">
+            Мощные возможности Qwen-3 AI
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Feature 1 */}
+            <div className="bg-slate-700 bg-opacity-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 transform hover:scale-105 duration-300 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+              <div className="text-purple-400 text-3xl mb-4 animate-float">🧠</div>
+              <h3 className="text-xl font-semibold mb-2 text-white">Продвинутая интеллектуальность</h3>
+              <p className="text-gray-300">
+                Благодаря передовым языковым моделям Qwen-3 обеспечивает ответы, близкие к человеческим, с глубоким пониманием контекста.
+              </p>
+            </div>
+
+            {/* Feature 2 */}
+            <div className="bg-slate-700 bg-opacity-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 transform hover:scale-105 duration-300 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+              <div className="text-purple-400 text-3xl mb-4 animate-shake">⚡</div>
+              <h3 className="text-xl font-semibold mb-2 text-white">Молниеносная скорость</h3>
+              <p className="text-gray-300">
+                Получайте мгновенные ответы на ваши запросы благодаря нашей оптимизированной и быстрой инфраструктуре.
+              </p>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="bg-slate-700 bg-opacity-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 transform hover:scale-105 duration-300 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+              <div className="text-purple-400 text-3xl mb-4 animate-wiggle">🔒</div>
+              <h3 className="text-xl font-semibold mb-2 text-white">Безопасность и конфиденциальность</h3>
+              <p className="text-gray-300">
+                Ваши разговоры конфиденциальны. Мы уделяем приоритетное внимание безопасности данных и приватности пользователей.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Use Cases Section */}
+        <div className="max-w-6xl mx-auto px-4 mb-12" id="use-cases-section">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 animate-shimmer bg-[length:200%_100%]">
+            Что вы можете делать с Qwen-3?
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Use Case 1 */}
+            <div className="flex items-start space-x-4 hover:transform hover:scale-105 transition-all duration-300 animate-fade-in-left" style={{ animationDelay: '0.2s' }}>
+              <div className="bg-pink-500 bg-opacity-20 p-3 rounded-full animate-morph">
+                <span className="text-2xl animate-scale">📝</span>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-2 text-white">Создание контента</h3>
+                <p className="text-gray-300">
+                  Генерируйте статьи, посты в блогах, маркетинговые тексты и креативные материалы с легкостью. Идеально для создателей контента и маркетологов.
+                </p>
+              </div>
+            </div>
+
+            {/* Use Case 2 */}
+            <div className="flex items-start space-x-4 hover:transform hover:scale-105 transition-all duration-300 animate-fade-in-right" style={{ animationDelay: '0.2s' }}>
+              <div className="bg-pink-500 bg-opacity-20 p-3 rounded-full animate-morph">
+                <span className="text-2xl animate-scale">💡</span>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-2 text-white">Ассистент для исследований</h3>
+                <p className="text-gray-300">
+                  Получайте помощь в исследованиях, краткие обзоры сложных тем и быстрые точные ответы на ваши вопросы.
+                </p>
+              </div>
+            </div>
+
+            {/* Use Case 3 */}
+            <div className="flex items-start space-x-4 hover:transform hover:scale-105 transition-all duration-300 animate-fade-in-left" style={{ animationDelay: '0.4s' }}>
+              <div className="bg-pink-500 bg-opacity-20 p-3 rounded-full animate-morph">
+                <span className="text-2xl animate-scale">🔍</span>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-2 text-white">Решение проблем</h3>
+                <p className="text-gray-300">
+                  Решайте сложные задачи с помощью ИИ. Получайте пошаговые решения и объяснения для различных задач.
+                </p>
+              </div>
+            </div>
+
+            {/* Use Case 4 */}
+            <div className="flex items-start space-x-4 hover:transform hover:scale-105 transition-all duration-300 animate-fade-in-right" style={{ animationDelay: '0.4s' }}>
+              <div className="bg-pink-500 bg-opacity-20 p-3 rounded-full animate-morph">
+                <span className="text-2xl animate-scale">🌐</span>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-2 text-white">Перевод языков</h3>
+                <p className="text-gray-300">
+                  Преодолевайте языковые барьеры с точными переводами и пониманием культурного контекста на разных языках.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* About Qwen-3 Section */}
+        <div className="max-w-4xl mx-auto px-4 mb-12 text-center" id="about-section">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 animate-shimmer bg-[length:200%_100%]">
+            О Qwen-3
+          </h2>
+          <p className="text-gray-300 mb-6 max-w-3xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+            Qwen-3 — это передовая языковая модель ИИ, разработанная для обеспечения интеллектуальных, полезных и безопасных бесед. С миллиардами параметров и обширной подготовкой на разнообразных данных Qwen-3 представляет следующее поколение ИИ-ассистентов, способных точно понимать и отвечать на запросы пользователей.
+          </p>
+          <div className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105 animate-bounce-in" style={{ animationDelay: '0.5s' }}>
+            <a href="https://qwen.ai" target="_blank" rel="noopener noreferrer" className="flex items-center">
+              Подробнее о Qwen-3 <span className="ml-2 animate-float">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Links with Animations */}
+      <footer className="py-8 px-4 bg-slate-900 text-center text-sm text-slate-400 w-full">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-6 mb-6 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+            <Link href="/privacy-policy" className="hover:underline hover:text-purple-400 transition-colors hover:animate-pulse">Политика конфиденциальности</Link>
+            <a href="#" className="hover:underline hover:text-purple-400 transition-colors hover:animate-pulse">渝ICP备2023003198号-89</a>
+          </div>
+          <div className="border-t border-slate-700 pt-6 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+            <p className="mb-2">© {new Date().getFullYear()} AI Chat. Все права защищены.</p>
+            <p>Связаться с нами: ytsgabcde19#2925.com, замените # на @ для получения email.</p>
+          </div>
+        </div>
       </footer>
     </div>
   );

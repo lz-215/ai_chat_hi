@@ -5,25 +5,25 @@ import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
 });
 
 export const metadata: Metadata = {
   title: 'Qwen-3 AI Chat-Engage in Intelligent Conversations',
-  description: 'Chat with our advanced AI assistant. Get instant answers, generate text, and explore the power of AI. English interface.',
-  keywords: 'Qwen-3, chatbot, artificial intelligence, deepseek, conversation, assistant, English',
+  description: 'Chat with our advanced AI assistant. Get instant answers, generate text, and explore the power of AI. Russian interface.',
+  keywords: 'Qwen-3, chatbot, artificial intelligence, deepseek, conversation, assistant, Russian',
   icons: {
     icon: '/qwen-3.svg',
     shortcut: '/qwen-3.svg',
     apple: '/qwen-3.svg',
   },
   verification: {
-    google: 'XgPdZyI8vssINHNw4crODgt9jViPEDJBoLdiuHAJaBY',
+    google: 'zM8fQGX-bdHSku-OAgInh2oLEXcb6j4_XVAOp15R3bc',
   },
 };
 
@@ -33,12 +33,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ru">
       <head>
         {/* Google Analytics */}
         <Script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-5KVY54T4PX"
+          src="https://www.googletagmanager.com/gtag/js?id=G-QP5RYWJDQ9"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -46,7 +46,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-5KVY54T4PX');
+            gtag('config', 'G-QP5RYWJDQ9');
           `}
         </Script>
       </head>
