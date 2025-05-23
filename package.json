@@ -12,6 +12,9 @@
     "app"
   ],
   "dependencies": {
-    "@upstash/redis": "^1.34.9"
+    "@upstash/redis": "^1.34.9",
+    "next": "^15.1.8",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   }
 }
