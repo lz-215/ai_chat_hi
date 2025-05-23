@@ -317,7 +317,7 @@ export default function ChatPage() {
           </div>
           <div className="border-t border-slate-700 pt-6 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
             <p className="mb-2">© {new Date().getFullYear()} AI Chat. Все права защищены.</p>
-            <p>Связаться с нами: ytsgabcde19#2925.com, замените # на @ для получения email.</p>
+            <p>Связаться с нами: ytsgabcde19@2925.com</p>
           </div>
         </div>
       </footer>

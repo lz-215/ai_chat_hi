@@ -5,18 +5,18 @@ import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin", "cyrillic"],
+  subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  subsets: ["latin", "cyrillic"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: 'Qwen-3 AI Chat-Engage in Intelligent Conversations',
-  description: 'Chat with our advanced AI assistant. Get instant answers, generate text, and explore the power of AI. Russian interface.',
-  keywords: 'Qwen-3, chatbot, artificial intelligence, deepseek, conversation, assistant, Russian',
+  title: 'Квен-3 AI Чат — Интеллектуальные беседы с ИИ',
+  description: 'Общайтесь с нашим продвинутым AI-ассистентом. Получайте мгновенные ответы, генерируйте тексты и открывайте возможности искусственного интеллекта. Русский интерфейс.',
+  keywords: 'Квен-3, чат-бот, искусственный интеллект, deepseek, беседа, ассистент, русский',
   icons: {
     icon: '/qwen-3.svg',
     shortcut: '/qwen-3.svg',

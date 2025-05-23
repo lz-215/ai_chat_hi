@@ -10,5 +10,8 @@
   },
   "workspaces": [
     "app"
-  ]
-} 
+  ],
+  "dependencies": {
+    "@upstash/redis": "^1.34.9"
+  }
+}
