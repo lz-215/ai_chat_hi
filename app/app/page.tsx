@@ -254,30 +254,67 @@ export default function ChatPage() {
   // Quick action buttons and models array removed
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-gray-100 font-[family-name:var(--font-geist-sans)]">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-100 via-purple-100 to-slate-200 text-gray-800 font-[family-name:var(--font-geist-sans)]">
+      {/* Google Login Button */}
+      <div className="absolute top-4 right-4 z-10">
+        {isLoggedIn ? (
+          <div className="flex items-center space-x-3 bg-white bg-opacity-90 p-2 px-4 rounded-full shadow-md">
+            {userImage && (
+              <img 
+                src={userImage} 
+                alt={userName} 
+                className="w-8 h-8 rounded-full" 
+              />
+            )}
+            <span className="text-sm text-purple-700">{userName}</span>
+            <button 
+              onClick={handleLogout}
+              className="text-xs text-gray-600 hover:text-purple-700"
+            >
+              लॉगआउट
+            </button>
+          </div>
+        ) : (
+          <div className="flex items-center">
+            {messageCount > 0 && (
+              <span className="text-xs text-gray-700 mr-4">
+                {messageCount}/15 संदेश
+              </span>
+            )}
+            <button 
+              onClick={handleGoogleLogin} 
+              className="flex items-center space-x-2 bg-white text-purple-700 px-4 py-2 rounded-full hover:bg-purple-100 transition-all duration-300 shadow-md transform hover:scale-105 hover:shadow-lg animate-bounce-in"
+            >
+              <GoogleIcon />
+              <span>Google से लॉगिन करें</span>
+            </button>
+          </div>
+        )}
+      </div>
+      
       {/* Models Bar Removed */}
 
       {/* Login Prompt Modal */}
       {showLoginPrompt && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-70">
-          <div className="bg-slate-800 p-6 rounded-lg shadow-xl max-w-md w-full animate-bounce-in">
-            <h2 className="text-xl font-bold text-purple-400 mb-4">Требуется вход в систему</h2>
-            <p className="text-gray-300 mb-6">
-              Вы достигли лимита в 15 бесплатных сообщений. Для продолжения использования сервиса, пожалуйста, войдите через Google.
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-30">
+          <div className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full animate-bounce-in">
+            <h2 className="text-xl font-bold text-purple-600 mb-4">लॉगिन आवश्यक है</h2>
+            <p className="text-gray-700 mb-6">
+              आपने 15 मुफ्त संदेशों की सीमा पूरी कर ली है। सेवा जारी रखने के लिए कृपया Google से लॉगिन करें।
             </p>
             <div className="flex justify-between">
               <button 
                 onClick={() => setShowLoginPrompt(false)}
-                className="px-4 py-2 bg-gray-600 text-white rounded-full hover:bg-gray-700 transition-colors"
+                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors"
               >
-                Отмена
+                रद्द करें
               </button>
               <button 
                 onClick={handleGoogleLogin}
-                className="flex items-center space-x-2 bg-white text-slate-800 px-4 py-2 rounded-full hover:bg-gray-100 transition-colors"
+                className="flex items-center space-x-2 bg-purple-500 text-white px-4 py-2 rounded-full hover:bg-purple-600 transition-all duration-300 transform hover:scale-105"
               >
                 <GoogleIcon />
-                <span>Войти через Google</span>
+                <span>Google से लॉगिन करें</span>
               </button>
             </div>
           </div>
@@ -296,52 +333,15 @@ export default function ChatPage() {
             height={70}
             className="object-contain animate-float"
           />
-          <h1 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 animate-shimmer bg-[length:200%_100%]">
-            Единый доступ к моделям Qwen-3 AI
+          <h1 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 animate-shimmer bg-[length:200%_100%]">
+            Qwen-3 AI मॉडल्स तक एकीकृत पहुँच
           </h1>
-        </div>
-
-        {/* Google Login Button */}
-        <div className="w-full max-w-2xl flex justify-end mb-4">
-          {isLoggedIn ? (
-            <div className="flex items-center space-x-3 bg-slate-800 bg-opacity-50 p-2 px-4 rounded-full">
-              {userImage && (
-                <img 
-                  src={userImage} 
-                  alt={userName} 
-                  className="w-8 h-8 rounded-full" 
-                />
-              )}
-              <span className="text-sm text-purple-300">{userName}</span>
-              <button 
-                onClick={handleLogout}
-                className="text-xs text-gray-400 hover:text-white"
-              >
-                Выйти
-              </button>
-            </div>
-          ) : (
-            <div className="flex items-center">
-              {messageCount > 0 && (
-                <span className="text-xs text-gray-300 mr-4">
-                  {messageCount}/15 сообщений
-                </span>
-              )}
-              <button 
-                onClick={handleGoogleLogin} 
-                className="flex items-center space-x-2 bg-white text-slate-800 px-4 py-2 rounded-full hover:bg-gray-100 transition-colors"
-              >
-                <GoogleIcon />
-                <span>Войти через Google</span>
-              </button>
-            </div>
-          )}
         </div>
 
         {/* Chat messages and Input area container */}
         <div className="w-full max-w-2xl flex flex-col flex-grow">
           {/* Chat Messages */}
-          <main className="flex-grow overflow-y-auto space-y-4 p-1 sm:p-3 rounded-t-lg bg-slate-800 bg-opacity-50 shadow-inner h-64 min-h-[200px] sm:min-h-[300px] md:min-h-[400px]">
+          <main className="flex-grow overflow-y-auto space-y-4 p-1 sm:p-3 rounded-t-lg bg-white bg-opacity-90 shadow-inner h-64 min-h-[200px] sm:min-h-[300px] md:min-h-[400px]">
             {messages.map((msg) => (
               <MessageBubble key={msg.id} text={msg.text} sender={msg.sender} />
             ))}
@@ -350,7 +350,7 @@ export default function ChatPage() {
           </main>
 
           {/* Chat Input Area with Animations */}
-          <div className="bg-slate-800 bg-opacity-50 p-3 sm:p-4 rounded-b-lg shadow-lg animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <div className="bg-white bg-opacity-90 p-3 sm:p-4 rounded-b-lg shadow-lg animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <div className="relative flex items-center">
               <textarea
                 value={inputValue}
@@ -362,28 +362,28 @@ export default function ChatPage() {
                   }
                 }}
                 placeholder={!isLoggedIn && messageCount >= 15 
-                  ? "Требуется вход в систему для продолжения" 
-                  : "Введите ваше сообщение... (Shift+Enter для новой строки)"}
-                className={`flex-grow w-full p-3 pr-20 bg-slate-700 text-white border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-400 resize-none min-h-[60px] max-h-[150px] text-sm sm:text-base transition-all duration-300 focus:shadow-[0_0_15px_rgba(168,85,247,0.5)] ${!isLoggedIn && messageCount >= 15 ? 'opacity-50' : ''}`}
+                  ? "जारी रखने के लिए लॉगिन आवश्यक है" 
+                  : "अपना संदेश लिखें... (नई पंक्ति के लिए Shift+Enter दबाएँ)"}
+                className={`flex-grow w-full p-3 pr-20 bg-gray-100 text-gray-800 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder-gray-500 resize-none min-h-[60px] max-h-[150px] text-sm sm:text-base transition-all duration-300 focus:shadow-[0_0_15px_rgba(168,85,247,0.3)] ${!isLoggedIn && messageCount >= 15 ? 'opacity-50' : ''}`}
                 rows={2}
                 disabled={!isLoggedIn && messageCount >= 15}
               />
               <div className="absolute right-3 bottom-2.5 flex items-center space-x-2">
-                <button className="p-1.5 text-slate-400 hover:text-purple-400 transition-colors hover:animate-wiggle">
+                <button className="p-1.5 text-gray-500 hover:text-purple-600 transition-colors hover:animate-wiggle">
                   <SettingsIcon />
                 </button>
                 {isLoading ? (
                   <button
                     onClick={handleStopGeneration}
                     className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all shadow-md active:bg-red-700 hover:animate-shake"
-                    title="Остановить генерацию"
+                    title="जनरेशन रोकें"
                   >
                     <StopIcon />
                   </button>
                 ) : (
                   <button
                     onClick={handleSendMessage}
-                    className={`p-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-all shadow-md active:bg-pink-700 disabled:opacity-50 hover:animate-pulse ${(!isLoggedIn && messageCount >= 15) || inputValue.trim() === '' ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    className={`p-2 bg-purple-500 text-white rounded-full hover:bg-purple-600 transition-all shadow-md active:bg-purple-700 disabled:opacity-50 hover:animate-pulse ${(!isLoggedIn && messageCount >= 15) || inputValue.trim() === '' ? 'opacity-50 cursor-not-allowed' : ''}`}
                     disabled={(!isLoggedIn && messageCount >= 15) || inputValue.trim() === ''}
                   >
                     <SendIcon />
@@ -396,38 +396,38 @@ export default function ChatPage() {
       </div>
 
       {/* Enhanced Footer Section with Rich Animations */}
-      <div className="w-full bg-slate-800 bg-opacity-70 mt-12 py-10">
+      <div className="w-full bg-white bg-opacity-90 mt-12 py-10">
         {/* Features Section */}
         <div className="max-w-6xl mx-auto px-4 mb-12" id="features-section">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 animate-shimmer bg-[length:200%_100%]">
-            Мощные возможности Qwen-3 AI
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 animate-shimmer bg-[length:200%_100%]">
+            Qwen-3 AI की शक्तिशाली क्षमताएँ
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="bg-slate-700 bg-opacity-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 transform hover:scale-105 duration-300 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-              <div className="text-purple-400 text-3xl mb-4 animate-float">🧠</div>
-              <h3 className="text-xl font-semibold mb-2 text-white">Продвинутая интеллектуальность</h3>
-              <p className="text-gray-300">
-                Благодаря передовым языковым моделям Qwen-3 обеспечивает ответы, близкие к человеческим, с глубоким пониманием контекста.
+            <div className="bg-purple-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 transform hover:scale-105 duration-300 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+              <div className="text-purple-600 text-3xl mb-4 animate-float">🧠</div>
+              <h3 className="text-xl font-semibold mb-2 text-purple-800">एडवांस्ड इंटेलिजेंस</h3>
+              <p className="text-gray-700">
+                Qwen-3 की उन्नत भाषा मॉडल्स मानव-समान उत्तर और गहरे संदर्भ की समझ प्रदान करती हैं।
               </p>
             </div>
 
             {/* Feature 2 */}
-            <div className="bg-slate-700 bg-opacity-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 transform hover:scale-105 duration-300 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-              <div className="text-purple-400 text-3xl mb-4 animate-shake">⚡</div>
-              <h3 className="text-xl font-semibold mb-2 text-white">Молниеносная скорость</h3>
-              <p className="text-gray-300">
-                Получайте мгновенные ответы на ваши запросы благодаря нашей оптимизированной и быстрой инфраструктуре.
+            <div className="bg-purple-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 transform hover:scale-105 duration-300 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+              <div className="text-purple-600 text-3xl mb-4 animate-shake">⚡</div>
+              <h3 className="text-xl font-semibold mb-2 text-purple-800">बिजली जैसी गति</h3>
+              <p className="text-gray-700">
+                हमारी अनुकूलित और तेज़ इंफ्रास्ट्रक्चर के कारण अपने प्रश्नों के तुरंत उत्तर पाएं।
               </p>
             </div>
 
             {/* Feature 3 */}
-            <div className="bg-slate-700 bg-opacity-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 transform hover:scale-105 duration-300 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-              <div className="text-purple-400 text-3xl mb-4 animate-wiggle">🔒</div>
-              <h3 className="text-xl font-semibold mb-2 text-white">Безопасность и конфиденциальность</h3>
-              <p className="text-gray-300">
-                Ваши разговоры конфиденциальны. Мы уделяем приоритетное внимание безопасности данных и приватности пользователей.
+            <div className="bg-purple-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 transform hover:scale-105 duration-300 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+              <div className="text-purple-600 text-3xl mb-4 animate-wiggle">🔒</div>
+              <h3 className="text-xl font-semibold mb-2 text-purple-800">सुरक्षा और गोपनीयता</h3>
+              <p className="text-gray-700">
+                आपकी बातचीत गोपनीय है। हम डेटा सुरक्षा और उपयोगकर्ता की प्राइवेसी को सर्वोच्च प्राथमिकता देते हैं।
               </p>
             </div>
           </div>
@@ -435,59 +435,59 @@ export default function ChatPage() {
 
         {/* Use Cases Section */}
         <div className="max-w-6xl mx-auto px-4 mb-12" id="use-cases-section">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 animate-shimmer bg-[length:200%_100%]">
-            Что вы можете делать с Qwen-3?
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 animate-shimmer bg-[length:200%_100%]">
+            Qwen-3 से आप क्या कर सकते हैं?
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Use Case 1 */}
             <div className="flex items-start space-x-4 hover:transform hover:scale-105 transition-all duration-300 animate-fade-in-left" style={{ animationDelay: '0.2s' }}>
-              <div className="bg-pink-500 bg-opacity-20 p-3 rounded-full animate-morph">
+              <div className="bg-pink-100 p-3 rounded-full animate-morph">
                 <span className="text-2xl animate-scale">📝</span>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-2 text-white">Создание контента</h3>
-                <p className="text-gray-300">
-                  Генерируйте статьи, посты в блогах, маркетинговые тексты и креативные материалы с легкостью. Идеально для создателей контента и маркетологов.
+                <h3 className="text-xl font-semibold mb-2 text-purple-800">सामग्री निर्माण</h3>
+                <p className="text-gray-700">
+                  आसानी से लेख, ब्लॉग पोस्ट, मार्केटिंग टेक्स्ट और रचनात्मक सामग्री जनरेट करें। कंटेंट क्रिएटर्स और मार्केटर्स के लिए आदर्श।
                 </p>
               </div>
             </div>
 
             {/* Use Case 2 */}
             <div className="flex items-start space-x-4 hover:transform hover:scale-105 transition-all duration-300 animate-fade-in-right" style={{ animationDelay: '0.2s' }}>
-              <div className="bg-pink-500 bg-opacity-20 p-3 rounded-full animate-morph">
+              <div className="bg-pink-100 p-3 rounded-full animate-morph">
                 <span className="text-2xl animate-scale">💡</span>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-2 text-white">Ассистент для исследований</h3>
-                <p className="text-gray-300">
-                  Получайте помощь в исследованиях, краткие обзоры сложных тем и быстрые точные ответы на ваши вопросы.
+                <h3 className="text-xl font-semibold mb-2 text-purple-800">शोध सहायक</h3>
+                <p className="text-gray-700">
+                  शोध में सहायता, जटिल विषयों का संक्षिप्त अवलोकन और आपके सवालों के तेज़, सटीक उत्तर पाएं।
                 </p>
               </div>
             </div>
 
             {/* Use Case 3 */}
             <div className="flex items-start space-x-4 hover:transform hover:scale-105 transition-all duration-300 animate-fade-in-left" style={{ animationDelay: '0.4s' }}>
-              <div className="bg-pink-500 bg-opacity-20 p-3 rounded-full animate-morph">
+              <div className="bg-pink-100 p-3 rounded-full animate-morph">
                 <span className="text-2xl animate-scale">🔍</span>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-2 text-white">Решение проблем</h3>
-                <p className="text-gray-300">
-                  Решайте сложные задачи с помощью ИИ. Получайте пошаговые решения и объяснения для различных задач.
+                <h3 className="text-xl font-semibold mb-2 text-purple-800">समस्या समाधान</h3>
+                <p className="text-gray-700">
+                  AI की मदद से जटिल समस्याओं का समाधान करें। विभिन्न कार्यों के लिए चरण-दर-चरण समाधान और स्पष्टीकरण प्राप्त करें।
                 </p>
               </div>
             </div>
 
             {/* Use Case 4 */}
             <div className="flex items-start space-x-4 hover:transform hover:scale-105 transition-all duration-300 animate-fade-in-right" style={{ animationDelay: '0.4s' }}>
-              <div className="bg-pink-500 bg-opacity-20 p-3 rounded-full animate-morph">
+              <div className="bg-pink-100 p-3 rounded-full animate-morph">
                 <span className="text-2xl animate-scale">🌐</span>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-2 text-white">Перевод языков</h3>
-                <p className="text-gray-300">
-                  Преодолевайте языковые барьеры с точными переводами и пониманием культурного контекста на разных языках.
+                <h3 className="text-xl font-semibold mb-2 text-purple-800">भाषा अनुवाद</h3>
+                <p className="text-gray-700">
+                  विभिन्न भाषाओं में सटीक अनुवाद और सांस्कृतिक संदर्भ की समझ के साथ भाषा बाधाओं को पार करें।
                 </p>
               </div>
             </div>
@@ -496,30 +496,30 @@ export default function ChatPage() {
 
         {/* About Qwen-3 Section */}
         <div className="max-w-4xl mx-auto px-4 mb-12 text-center" id="about-section">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 animate-shimmer bg-[length:200%_100%]">
-            О Qwen-3
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 animate-shimmer bg-[length:200%_100%]">
+            Qwen-3 के बारे में
           </h2>
-          <p className="text-gray-300 mb-6 max-w-3xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-            Qwen-3 — это передовая языковая модель ИИ, разработанная для обеспечения интеллектуальных, полезных и безопасных бесед. С миллиардами параметров и обширной подготовкой на разнообразных данных Qwen-3 представляет следующее поколение ИИ-ассистентов, способных точно понимать и отвечать на запросы пользователей.
+          <p className="text-gray-700 mb-6 max-w-3xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+            Qwen-3 एक उन्नत AI भाषा मॉडल है, जिसे बुद्धिमान, उपयोगी और सुरक्षित संवाद प्रदान करने के लिए डिज़ाइन किया गया है। अरबों पैरामीटर और विविध डेटा पर व्यापक प्रशिक्षण के साथ, Qwen-3 अगली पीढ़ी के AI सहायक का प्रतिनिधित्व करता है, जो उपयोगकर्ता के अनुरोधों को सटीक रूप से समझने और उत्तर देने में सक्षम है।
           </p>
-          <div className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105 animate-bounce-in" style={{ animationDelay: '0.5s' }}>
+          <div className="inline-block bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105 animate-bounce-in" style={{ animationDelay: '0.5s' }}>
             <a href="https://qwen.ai" target="_blank" rel="noopener noreferrer" className="flex items-center">
-              Подробнее о Qwen-3 <span className="ml-2 animate-float">→</span>
+              Qwen-3 के बारे में और जानें <span className="ml-2 animate-float">→</span>
             </a>
           </div>
         </div>
       </div>
 
       {/* Footer Links with Animations */}
-      <footer className="py-8 px-4 bg-slate-900 text-center text-sm text-slate-400 w-full">
+      <footer className="py-8 px-4 bg-purple-50 text-center text-sm text-gray-600 w-full">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-wrap justify-center gap-6 mb-6 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-            <Link href="/privacy-policy" className="hover:underline hover:text-purple-400 transition-colors hover:animate-pulse">Политика конфиденциальности</Link>
-            <a href="#" className="hover:underline hover:text-purple-400 transition-colors hover:animate-pulse">渝ICP备2023003198号-85</a>
+            <Link href="/privacy-policy" className="hover:underline hover:text-purple-600 transition-colors hover:animate-pulse">गोपनीयता नीति</Link>
+            <a href="#" className="hover:underline hover:text-purple-600 transition-colors hover:animate-pulse">渝ICP备2025051720号-60</a>
           </div>
-          <div className="border-t border-slate-700 pt-6 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-            <p className="mb-2">© {new Date().getFullYear()} AI Chat. Все права защищены.</p>
-            <p>Связаться с нами: ytsgabcde18@2925.com</p>
+          <div className="border-t border-purple-100 pt-6 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+            <p className="mb-2">© {new Date().getFullYear()} AI Chat. सर्वाधिकार सुरक्षित।</p>
+            <p>संपर्क करें: ytsgabcde23@2925.com</p>
           </div>
         </div>
       </footer>
