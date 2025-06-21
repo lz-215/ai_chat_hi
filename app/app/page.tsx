@@ -515,7 +515,6 @@ export default function ChatPage() {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-wrap justify-center gap-6 mb-6 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             <Link href="/privacy-policy" className="hover:underline hover:text-purple-600 transition-colors hover:animate-pulse">गोपनीयता नीति</Link>
-            <a href="#" className="hover:underline hover:text-purple-600 transition-colors hover:animate-pulse">渝ICP备2025051720号-60</a>
           </div>
           <div className="border-t border-purple-100 pt-6 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
             <p className="mb-2">© {new Date().getFullYear()} AI Chat. सर्वाधिकार सुरक्षित।</p>

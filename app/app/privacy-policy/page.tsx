@@ -86,8 +86,6 @@ export default function PrivacyPolicyPage() {
       <footer className="py-6 px-4 text-center text-xs text-slate-400 w-full">
         <Link href="/" className="hover:underline hover:text-purple-400">मुख्य पृष्ठ</Link>
         <span className="mx-2">|</span>
-        <a href="#" className="hover:underline hover:text-purple-400">渝ICP备2025051720号-60</a>
-        <span className="mx-2">|</span>
         <span>© {new Date().getFullYear()} AI Chat. सर्वाधिकार सुरक्षित।</span>
       </footer>
     </div>
